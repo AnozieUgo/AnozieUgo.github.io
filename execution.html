@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Virtualization</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <span>DataVirtual</span>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="data.html">Data</a></li>
+          <li><a href="execution.html">APP Execution</a></li>
+          <li><a href="author.html">Author</a></li>
+        </ul>
+      </nav>
+      <section class="header_container">
+        <div class="header_image_overlay">
+          <p>APP VIRTUALIZATION EXECUTION</p>
+          <span>How to execute the data virtualization</span>
+        </div>
+      </section>
+    </header>
+    <main>
+      <div class="box_container">
+        <section class="main_body">
+          <h1>App Virtualization Execution</h1>
+          <div class="box">
+            <p>To execute the app, the data virtualization, the following procedures were taken; <br>
+                Ensure that the code is wrapped in; 
+                <pre>document.addEventListener("DOMContentLoaded", async function () {
+
+                });
+            </pre>
+                </p><br>
+            <span>Fetch the data</span>
+            <p>
+              The data for the <strong>"Top four most populous asian countries"</strong> sources by calling the app thus; <br><br>
+              <pre
+                >
+                    var populations = [];
+                    async function getCountryData(country) {
+                      try {
+                        const url = `https://get-population.p.rapidapi.com/population/country?country=${country}`;
+                        const options = {
+                          method: "GET",
+                          headers: {
+                            "X-RapidAPI-Key":
+                              "YOUR API KEY",
+                            "X-RapidAPI-Host": "get-population.p.rapidapi.com",
+                          },
+                        };
+                  
+                        const response = await fetch(url, options);
+                        const result = await response.json();
+                        return result;
+                      } catch (error) {
+                        console.error(error);
+                        throw error;
+                      }
+                    }
+                </pre>. This fetches the data of which ever country that is fed to it; 
+            </p>
+            <p>
+            <strong
+                >Provide an array of the countries;</strong>
+                <pre>
+                    const countries = ["China", "India", "Indonesia", "Pakistan"];
+                </pre>
+            </p>
+            <p>
+                <span>Call the data and setup the virtualization element and objects</span>
+                <pre>
+                    const colors = ["#483D8B", "#5F9EA0", "#2F4F4F", "#FF5733", "#33FF73"];
+                    try {
+                        for (let i = 0; i < countries.length; i++) {
+                          const country = countries[i];
+                          const countryData = await getCountryData(country);
+                          const population = countryData.readable_format;
+                    
+                          const statElement = document.createElement("div");
+                          statElement.className = "stat";
+                    
+                          const statTextElement = document.createElement("span");
+                          statTextElement.className = "stat_text";
+                          statTextElement.textContent = country;
+                    
+                          const populationElement = document.createElement("span");
+                          populationElement.className = "population";
+                          populationElement.textContent = population;
+                    
+                          statElement.appendChild(statTextElement);
+                          statElement.appendChild(populationElement);
+                    
+                          // Assign color based on index
+                          statElement.style.backgroundColor = colors[i];
+                    
+                          populationContainer.appendChild(statElement);
+                          populations.push(countryData.count);
+                        }
+                      } catch (error) {
+                        console.error("An error occurred:", error);
+                      }
+                </pre>
+                <span>Virtualize the data using a method of your choice</span>
+                <p>In this case, I have used custom boxes and <a href="https://www.chartjs.org/docs/latest/charts/doughnut.html">Chart.js</a> donut chart.</p>
+                <pre>
+                    new Chart(document.getElementById("chart_box"), {
+                        type: "doughnut",
+                        options: {
+                          animation: true,
+                          plugins: {
+                            legend: {
+                              display: true,
+                            },
+                            tooltip: {
+                              enabled: true,
+                            },
+                          },
+                        },
+                        data: {
+                          labels: ["China", "India", "Indonesia", "Pakistan"],
+                          datasets: [
+                            {
+                              label: "Population.",
+                              data: [
+                                populations[0],
+                                populations[1],
+                                populations[2],
+                                populations[3],
+                              ],
+                              backgroundColor: [
+                                "#483D8B",
+                                "#5F9EA0",
+                                "#2F4F4F",
+                                "#FF5733",
+                                "#33FF73",
+                              ],
+                              hoverOffset: 4,
+                            },
+                          ],
+                        },
+                      });
+                </pre>
+                Note: Ensure that you have  a <b><i>canvas</i></b> element with id of <b>
+                    box_stat</b>
+                In your html file
+            </p>
+          </div>
+
+          <div class="box">
+            <p>To execute the data virtualization for the bar chart representing <b> Effects of covid-19 in the Four most populous countries of the Asian continent, the following procedures were taken</b></p><br>
+            <span>Fetch the data</span>
+            <p>
+              <pre
+                >
+                    async function getCovidStat(country) {
+                        try {
+                        const url = `https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/total?country=${country}`;
+                        const options = {
+                            method: "GET",
+                            headers: {
+                            "X-RapidAPI-Key":
+                                "API KEY",
+                            "X-RapidAPI-Host": "covid-19-coronavirus-statistics.p.rapidapi.com",
+                            },
+                        };
+
+                        const response = await fetch(url, options);
+                        const result = await response.json();
+                        return result;
+                        } catch (error) {
+                        console.error(error);
+                        throw error;
+                        }
+                    }
+                </pre>. This fetches the data on the stat of covid-19 for the countries supplied. 
+            </p>
+            <p>
+            <strong
+                >Provide an array of the countries;</strong>
+                <pre>
+                    const countries = ["China", "India", "Indonesia", "Pakistan"];
+                </pre>
+            </p>
+            <p>
+                <span>Call the data and setup objects</span>
+                <pre>
+                    const countryCovidStat = [];
+                    try {
+                      for (let j = 0; j < countries.length; j++) {
+                        const country = countries[j];
+                        const covidData = await getCovidStat(country);
+                        const deaths = covidData.data.deaths;
+                        const confirmed = covidData.data.confirmed;
+                        countryCovidStat.push({ deaths, confirmed });
+                      }
+                    } catch (error) {
+                      console.error("An error occurred:", error);
+                    }
+                </pre>
+                <span>Virtualize the data using a method of your choice</span>
+                <p>In this case, I have used <a href="https://www.chartjs.org/docs/latest/charts/bar.html">Chart.js</a> donut chart.</p>
+                <pre>
+                    // barchart
+                    const ctx = document.getElementById("bar_box");
+                    const data = {
+                        labels: [
+                        `China (death: ${countryCovidStat[0]["deaths"]}, confirmed: ${countryCovidStat[0]["deaths"]})`,
+                        `India (death: ${countryCovidStat[1]["deaths"]}, confirmed: ${countryCovidStat[1]["deaths"]})`,
+                        `Indonesia (death: ${countryCovidStat[2]["deaths"]}, confirmed: ${countryCovidStat[2]["deaths"]})`,
+                        `Pakistan (death: ${countryCovidStat[3]["deaths"]}, confirmed: ${countryCovidStat[3]["deaths"]})`,
+                        ],
+                        datasets: [
+                        {
+                            label: "Confirmed",
+                            data: [
+                            countryCovidStat[0]["confirmed"],
+                            countryCovidStat[1]["confirmed"],
+                            countryCovidStat[2]["confirmed"],
+                            countryCovidStat[3]["confirmed"],
+                            ],
+                            backgroundColor: "#483D8B",
+                        },
+                        {
+                            label: "Death",
+                            data: [
+                            countryCovidStat[0]["deaths"],
+                            countryCovidStat[1]["deaths"],
+                            countryCovidStat[2]["deaths"],
+                            countryCovidStat[3]["deaths"],
+                            ],
+                            backgroundColor: "#FF5733",
+                        },
+                        ],
+                    };
+
+                    const config = {
+                        type: "bar",
+                        data: data,
+                        options: {
+                        scales: {
+                            y: {
+                            beginAtZero: true,
+                            max: 46000000,
+                            stepSize: 100000,
+                            },
+                        },
+                        },
+                    };
+
+                    if (ctx) {
+                        new Chart(ctx, config);
+                    }
+                </pre>
+                Note: Ensure that you have  a <b><i>canvas</i></b> element with id of <b>
+                    bar_box</b>
+                In your html file
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+    <!-- footer starts here -->
+    <footer>
+      <div class="footer_top">
+        <div class="footer_description">
+          <h1>Description</h1>
+          <p>
+            Data virtualization is a technology that enables efficient and
+            seamless access to dispersed data sources, regardless of their
+            physical location or structure. By providing a unified and
+            abstracted view of data, it minimizes data duplication and reduces
+            the need for complex ETL processes. This approach enhances agility
+            and simplifies data integration for improved decision-making across
+            organizations.
+          </p>
+        </div>
+        <div class="footer_links">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="data.html">Data</a></li>
+            <li><a href="execution.html">APP Execution</a></li>
+            <li><a href="author.html">Author</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer_bottom">
+        <span>Copyright &copy;2023</span>
+
+        <span> All right reserved, Anozie Ugochi. </span>
+      </div>
+    </footer>
+    <!-- footer ends here -->
+  </body>
+</html>

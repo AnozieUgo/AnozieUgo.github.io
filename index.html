@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <span>DataVirtual</span>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="data.html">Data</a></li>
+          <li><a href="execution.html">APP Execution</a></li>
+          <li><a href="author.html">Author</a></li>
+        </ul>
+      </nav>
+      <section class="header_container">
+        <div class="header_image_overlay">
+          <p>DATA VISUALIZATION</p>
+          <span>Get a good visual representation of the live data sets</span>
+        </div>
+      </section>
+    </header>
+    <main>
+      <div class="box_container">
+        <section class="main_body">
+          <!-- statistics box -->
+          <h1>Top four Asian countries by population</h1>
+          <div id="box_stat"></div>
+          <!-- statistics box ends here -->
+
+          <!-- barchart chart starts here -->
+          <div class="chart_container">
+            <div class="donut_chart">
+              <h1>Top Asian Countries by population</h1>
+              <canvas id="chart_box"></canvas>
+            </div>
+            <div class="bar_chart">
+              <h1>Covid19 effect in these asian countries</h1>
+              <canvas id="bar_box"></canvas>
+            </div>
+          </div>
+          <!-- barchart ends here -->
+        </section>
+      </div>
+    </main>
+    <!-- footer starts here -->
+    <footer>
+      <div class="footer_top">
+        <div class="footer_description">
+          <h1>Description</h1>
+          <p>
+            Data virtualization is a technology that enables efficient and
+            seamless access to dispersed data sources, regardless of their
+            physical location or structure. By providing a unified and
+            abstracted view of data, it minimizes data duplication and reduces
+            the need for complex ETL processes. This approach enhances agility
+            and simplifies data integration for improved decision-making across
+            organizations.
+          </p>
+        </div>
+        <div class="footer_links">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="data.html">Data</a></li>
+            <li><a href="execution.html">APP Execution</a></li>
+            <li><a href="author.html">Author</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer_bottom">
+        <span>Copyright &copy;2023</span>
+
+        <span> All right reserved, Anozie Ugochi. </span>
+      </div>
+    </footer>
+    <!-- footer ends here -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/script.js" defer></script>
+  </body>
+</html>

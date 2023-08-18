@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Virtualization</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <span>DataVirtual</span>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="data.html">Data</a></li>
+          <li><a href="execution.html">APP Execution</a></li>
+          <li><a href="author.html">Author</a></li>
+        </ul>
+      </nav>
+      <section class="header_container">
+        <div class="header_image_overlay">
+          <p>DATA SOURCE/CONTENT</p>
+          <span>About our data</span>
+        </div>
+      </section>
+    </header>
+    <main>
+      <div class="box_container">
+        <section class="main_body">
+          <h1>Data content and source</h1>
+          <div class="box">
+            <p>To use any of these API links, an API-Key is needed which would be added to the header of the request.</p><br>
+            <span>Top Four Most Populous Countries in Asia</span>
+            <p>
+              The data was sourced from the live api
+              <strong
+                >https://get-population.p.rapidapi.com/population/country?country=${country}</strong
+              >. The API fetches the world population in realtime. However,
+              using this wikipedia resource
+              <strong
+                >https://en.wikipedia.org/wiki/List_of_Asian_countries_by_population</strong
+              >, I sourced for the four most populous asian countries and serve
+              each of them to the api at <strong>${country}</strong>.
+            </p>
+            <p>
+              Thus, having an api link of this nature;
+              <strong>
+                https://get-population.p.rapidapi.com/population/country?country=${country}</strong
+              >. 
+            </p><p>
+                <span>Nature of request:</span><br>
+                To access the data, make an api-request using the format below; 
+                <pre>
+                    const url = 'https://get-population.p.rapidapi.com/population/country?country=China';
+                    const options = {
+                        method: 'GET',
+                        headers: {
+                            'X-RapidAPI-Key': 'YOUR-API-KEY',
+                            'X-RapidAPI-Host': 'get-population.p.rapidapi.com'
+                        }
+                    };
+                </pre>
+                <span>The structure of the response data is as follows;</span>
+                <pre>
+                    {
+                        count:1456820983
+                        readable_format:"1,456,820,983"
+                        country:"China"
+                      }
+                </pre>
+                However, for this project, I only picked the <b>readable_format</b> key of the object
+            </p>
+          </div>
+          <div class="box">
+            <span
+              >Covid-19 Effect in the top four most asian populated
+              countries</span
+            >
+            <p>
+              The data was sourced from the live api
+              <strong
+                >https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/total?country=${country}</strong
+              >, where <b>${country}</b>, is the placeholder for any of the countries (China, India, Parkistan, Indonesia). 
+            </p>
+            <p>The API fetches the covid-19 reports of different countries. However,
+                using this wikipedia resource
+                <strong
+                  >https://en.wikipedia.org/wiki/List_of_Asian_countries_by_population</strong
+                >, I sourced for the four most populous asian countries and serve
+                each of them to the api at <strong>${country}</strong>.</p>
+            <p>
+              Thus, having an api link of this nature;
+              <strong>
+                https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/total?country={country}</strong
+              >
+            </p>
+            <p>
+                <span>Nature of request:</span><br>
+                To access the data, make an api-request using the format below; 
+                <pre>
+                    const url = `https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/total?country=${country}`;
+                    const options = {
+                        method: "GET",
+                        headers: {
+                        "X-RapidAPI-Key":
+                            "YOUR-API-KEY",
+                        "X-RapidAPI-Host": "get-population.p.rapidapi.com",
+                        },
+                    };
+                </pre>
+                <span>The structure of the response data is as follows;</span>
+                <pre>
+                    {
+                        "error": false,
+                        statusCode:200
+                        message:"OK"
+                        data:
+                        recovered:null
+                        deaths:101056
+                        confirmed:4903524
+                        lastChecked:"2023-08-18T13:48:46+00:00"
+                        lastReported:"2023-03-10T04:21:03+00:00"
+                        location:"China"
+                        }
+                      }
+                </pre>
+                However, for this project, we are only picking the <b>deaths</b> and <b>confirmed</b> keys of the data object
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+    <!-- footer starts here -->
+    <footer>
+      <div class="footer_top">
+        <div class="footer_description">
+          <h1>Description</h1>
+          <p>
+            Data virtualization is a technology that enables efficient and
+            seamless access to dispersed data sources, regardless of their
+            physical location or structure. By providing a unified and
+            abstracted view of data, it minimizes data duplication and reduces
+            the need for complex ETL processes. This approach enhances agility
+            and simplifies data integration for improved decision-making across
+            organizations.
+          </p>
+        </div>
+        <div class="footer_links">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="data.html">Data</a></li>
+            <li><a href="execution.html">APP Execution</a></li>
+            <li><a href="author.html">Author</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer_bottom">
+        <span>Copyright &copy;2023</span>
+
+        <span> All right reserved, Anozie Ugochi. </span>
+      </div>
+    </footer>
+    <!-- footer ends here -->
+  </body>
+</html>
