@@ -217,3 +217,23 @@ footer h1 {
 .box p {
   margin-top: 10px;
 }
+
+/* Media query for mobile view */
+@media screen and (max-width: 768px) {
+  #chart_box {
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    width: 50%;
+  }
+  .donut_chart {
+    width: 100%;
+  }
+  .bar_chart {
+    width: 100%;
+  }
+  .footer_links {
+    flex: 1;
+  }
+}
